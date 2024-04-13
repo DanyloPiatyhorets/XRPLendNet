@@ -11,6 +11,11 @@ const Home: NextPage = () => {
 
   const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton','dmddm'];
 
+  const [nameMap,setMap]= useState(new Map());
+
+  const addItemToMap = (key: string, value: number) => {
+    setMap((prevMap) => new Map(prevMap.set(key, value)));
+  };
 
 
 
@@ -42,7 +47,9 @@ const Home: NextPage = () => {
 
         <div>
         <ul>
-        {names.map((name) => (
+        {
+        names.map((name) => (
+          
           <li>{name}
           <p>Amount due:</p>
           <p>Time till due:</p>
@@ -50,9 +57,9 @@ const Home: NextPage = () => {
           <p>Nft info:</p>
           <p>Owner:</p>
           <input
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              type="text"
+              value={nameMap.get(name)}
+              onChange={(e) => addItemToMap(name,+e.target.value)}
+              type="number"
               placeholder="Amount to pay (default to remaining payment)"
               className="w-6/12 placeholder-gray-300 flex rounded-full border-black bg-slate-400 px-20 py-2.5 text-black duration-300 ease-in-out"
             />
