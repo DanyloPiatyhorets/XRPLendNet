@@ -11,6 +11,14 @@ const Home: NextPage = () => {
   const [interest, setInterest] = useState("");
   const [term, setTerm] = useState("");
 
+
+  const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton','dmddm'];
+
+  const [nameMap,setMap]= useState(new Map());
+
+  const addItemToMap = (key: string, value: number) => {
+    setMap((prevMap) => new Map(prevMap.set(key, value)));
+  };
   
 
   const handleCreateLoanSubmit = async () => {
@@ -41,7 +49,7 @@ const Home: NextPage = () => {
             </div>
             </div>
           </div>
-            <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center">
             <div className="border border-blue-700 border-2 p-4 text-center italic rounded-lg mt-10 px-20">
               <p className="text-blue-900 text-3xl mb-10 font-bold">Create a loan</p>
               <div className="flex flex-col gap-5">
@@ -93,9 +101,29 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
+          <div>
+            <h1 className="text-center text-blue-900 text-5xl mb-10 font-bold mt-10">Active loans</h1>
+            <ul className="flex flex-wrap">
+              {names.map((name) => (
+                  <li key={name} className="w-1/2 p-4">
+                    <div className="border-blue-700 border-2 p-4 rounded-lg">
+                      <h1 className="text-blue-900 text-2xl mb-5 font-bold text-center">{name}</h1>
+                      <p className="text-blue-900 text-lg">Amount due:</p>
+                      <p className="text-blue-900 text-lg">Time till due:</p>
+                      <p className="text-blue-900 text-lg">Total remaining:</p>
+                      <p className="text-blue-900 text-lg">Nft info:</p>
+                      <p className="text-blue-900 text-lg mb-2">Borrower:</p>
+
+
+                    </div>
+                  </li>
+              ))}
+            </ul>
+
+          </div>
         </main>
         <footer>
-          <div className="py-5 bg-blue-300">
+          <div className="py-5 bg-blue-300 mt-10">
             <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank"
                className="text-blue-900 flex justify-center">
               Made with ❤️ by your friends at #60DaysofXRPL London 😎
