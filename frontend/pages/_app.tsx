@@ -4,14 +4,6 @@ import type { AppProps } from 'next/app';
 import { type Chain } from '@rainbow-me/rainbowkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
-import {
-  arbitrum,
-  base,
-  mainnet,
-  optimism,
-  polygon,
-  sepolia,
-} from 'wagmi/chains';
 import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 
 const xrp = {
@@ -37,8 +29,8 @@ const xrp = {
 
 
 const config = getDefaultConfig({
-  appName: 'RainbowKit App',
-  projectId: 'YOUR_PROJECT_ID',
+  appName: 'XRPLendNet',
+  projectId: '8461a6eaad6fe74d02500d1b73da9777',
   chains: [
     xrp,
   ],
