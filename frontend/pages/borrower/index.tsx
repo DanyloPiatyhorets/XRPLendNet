@@ -6,11 +6,15 @@ import Link from 'next/link'
 
 
 const Home: NextPage = () => {
-  const [borrower, setBorrower] = useState("");
   const [amount, setAmount] = useState("");
+  
+
+  const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton','dmddm'];
+
+
+
 
   const handleCreateLoanSubmit = async () => {
-    
   }
 
   return (
@@ -36,33 +40,28 @@ const Home: NextPage = () => {
           
         </div>
 
-        <div className="mt-10">
-          <p className="mt-5 text-black dark:text-black">
-            Create a loan
-          </p>
-          <div className="flex flex-wrap gap-5">
-            <input
-              value={borrower}
-              onChange={(e) => setBorrower(e.target.value)}
-              type="text"
-              placeholder="Enter borrower address (0x...)"
-              className="placeholder-gray-300 flex rounded-full border-black bg-slate-400 px-20 py-2.5 text-black duration-300 ease-in-out"
-            />
-            <input
+        <div>
+        <ul>
+        {names.map((name) => (
+          <li>{name}
+          <p>Amount due:</p>
+          <p>Time till due:</p>
+          <p>Total remaining:</p>
+          <p>Nft info:</p>
+          <p>Owner:</p>
+          <input
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               type="text"
-              placeholder="Enter loan value in XRP"
-              className="placeholder-gray-300 flex rounded-full border-black bg-slate-400 px-10 py-2.5 text-black duration-300 ease-in-out"
+              placeholder="Amount to pay (default to remaining payment)"
+              className="w-6/12 placeholder-gray-300 flex rounded-full border-black bg-slate-400 px-20 py-2.5 text-black duration-300 ease-in-out"
             />
-            <button
-              onClick={handleCreateLoanSubmit}
-              aria-label="button"
-              className="flex rounded-full border-black bg-slate-400 px-10 py-2.5 text-black duration-300 ease-in-out"
-            >
-              Submit
-            </button>
-          </div>
+          <button className="placeholder-gray-300 flex rounded-full border-black bg-slate-400 px-20 py-2.5 text-black duration-300 ease-in-out">Pay</button>
+
+
+          </li>
+        ))}
+      </ul>
         </div>
       </main>
     </div>
