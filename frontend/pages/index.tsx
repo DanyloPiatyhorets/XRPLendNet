@@ -27,7 +27,7 @@ const Home: NextPage = () => {
         <ConnectButton />
 
         <div className="mt-10">
-          <p className="mt-5 text-black dark:text-white">
+          <p className="mt-5 text-black dark:text-black">
             Create a loan
           </p>
           <div className="flex flex-wrap gap-5">
@@ -36,19 +36,19 @@ const Home: NextPage = () => {
               onChange={(e) => setBorrower(e.target.value)}
               type="text"
               placeholder="Enter borrower address (0x...)"
-              className="rounded-full border border-stroke px-6 py-2.5 shadow-solid-2 focus:border-primary focus:outline-none dark:border-strokedark dark:bg-black dark:shadow-none dark:focus:border-primary"
+              className="placeholder-gray-300 flex rounded-full border-black bg-slate-400 px-20 py-2.5 text-black duration-300 ease-in-out"
             />
             <input
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               type="text"
               placeholder="Enter loan value in XRP"
-              className="rounded-full border border-stroke px-6 py-2.5 shadow-solid-2 focus:border-primary focus:outline-none dark:border-strokedark dark:bg-black dark:shadow-none dark:focus:border-primary"
+              className="placeholder-gray-300 flex rounded-full border-black bg-slate-400 px-10 py-2.5 text-black duration-300 ease-in-out"
             />
             <button
               onClick={handleCreateLoanSubmit}
               aria-label="button"
-              className="flex rounded-full bg-black px-7.5 py-2.5 text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark dark:hover:bg-blackho"
+              className="flex rounded-full border-black bg-slate-400 px-10 py-2.5 text-black duration-300 ease-in-out"
             >
               Submit
             </button>
