@@ -5,12 +5,15 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
+import "backend/contracts/Lender.sol";
 
 contract Borrower is ERC721, ERC721Pausable, ERC721Burnable {
     address constant token = 0xe469c4473af82217B30CF17b10BcDb6C8c796e75;
 
     uint256 private paymentAmount;
     uint256 private amountPaid;
+
+    address private creditorAddress;
 
     uint256 lenderID;
 
@@ -23,23 +26,24 @@ contract Borrower is ERC721, ERC721Pausable, ERC721Burnable {
 
     // make interval payment
     function makePayment() public returns (bool){
+        amountPaid += amount;
         return IERC20.transferFrom(msg.sender, ownerOf(lenderID), paymentAmount);
     }
 
     // overpay
-    function makePayment(uint256 amount) public returns (bool){
+    function MakePayment(uint256 amount) public returns (bool){
         if(amount < paymentAmount){ return false;}
-        else{return IERC20.transferFrom(msg.sender, ownerOf(lenderID), amount);}
+        else{
+            amountPaid += amount;
+            return IERC20.transferFrom(msg.sender, ownerOf(lenderID), amount);
+        }
     }
 
-    function paidInFull() public returns (bool){
-
+    function PaidInFull() public returns (bool){
+        creditorAddress.PaidInFull(amountPaid);
     }
 
-    function safeMint(address to, uint256 tokenId) public onlyOwner {
-        _safeMint(to, tokenId);
-    }
-
+    
     // The following functions are overrides required by Solidity.
 
     function _update(address to, uint256 tokenId, address auth)
