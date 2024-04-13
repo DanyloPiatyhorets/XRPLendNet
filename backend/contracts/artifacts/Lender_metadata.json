@@ -9,7 +9,12 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "initialOwner",
+						"name": "borrower",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "lender",
 						"type": "address"
 					}
 				],
@@ -232,26 +237,26 @@
 			},
 			{
 				"inputs": [],
-				"name": "GetAmountPaid",
+				"name": "CheckDefault",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "bool",
 						"name": "",
-						"type": "uint256"
+						"type": "bool"
 					}
 				],
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "amount",
+						"name": "amountRepaid",
 						"type": "uint256"
 					}
 				],
-				"name": "MakePayment",
+				"name": "PaidInFull",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -264,7 +269,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "PaidInFull",
+				"name": "SeizeCollateralIfDefault",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -357,19 +362,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "makePayment",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "name",
 				"outputs": [
 					{
@@ -379,6 +371,40 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "datatsn",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC721Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -709,7 +735,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"backend/contracts/Borrower.sol": "Borrower"
+			"backend/contracts/Lender.sol": "Lender"
 		},
 		"evmVersion": "shanghai",
 		"libraries": {},
@@ -876,19 +902,19 @@
 			]
 		},
 		"backend/contracts/Borrower.sol": {
-			"keccak256": "0xaa5f79efbfb457e2926c38900e1021a6f1f3e0061e786ae043991df9f568aae9",
+			"keccak256": "0x3f8c9c4f2aa4e0a46f7799bc6de67d662315f1cc1bffe42f2a68ad4769ad9d02",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://269780677835a0939b4f7dd8819e33dc0fab73a33d1fda04356704f0d20744d5",
-				"dweb:/ipfs/QmVA5fAyFjjQBXSC3jMQprdzMULzgJEdxSdHabhw64Bipo"
+				"bzz-raw://bfb62390b4a3378f7f48220ab80bb88e5680b44a07c33e81128bcdffc662f33f",
+				"dweb:/ipfs/QmeKoziNibKPw9nwgwuzeN6n4mXaRKXG6gY3pUsrVCxmLx"
 			]
 		},
 		"backend/contracts/Lender.sol": {
-			"keccak256": "0xded700d6255f87cc9c840902ca40adea9584e7b9f4aa9918baa87f10e48bbdf1",
+			"keccak256": "0xa7cbfc93bb84526ca03c2917f6165393d72f7a62b6e591d34aa9d18c8c9baa24",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://552c70572ba02f16bd479ece23d2b91c53adda002b4b364c41467e22057f63ab",
-				"dweb:/ipfs/QmQpwaRzmx2Mq1SkV9ZVaH3xPtbociimKwZxVQK5rD9CJc"
+				"bzz-raw://f74be1f2e26cf71daaaadfd058440265e5f6d3dd45054cdc54104cb450e290ff",
+				"dweb:/ipfs/QmYfDH2MPF9yRJXzwZ6vXXe1fDmAp1ac1Dithsfgt8xYgb"
 			]
 		}
 	},

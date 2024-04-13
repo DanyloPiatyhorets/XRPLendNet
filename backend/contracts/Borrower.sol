@@ -5,29 +5,31 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
+
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+
 import "backend/contracts/Lender.sol";
 
-contract Borrower is ERC721, ERC721Pausable, ERC721Burnable {
+contract Borrower is ERC721, ERC721Pausable{
     address constant token = 0xe469c4473af82217B30CF17b10BcDb6C8c796e75;
 
     uint256 private paymentAmount;
     uint256 private amountPaid;
 
-    address private creditorAddress;
+    Lender private creditorContract;
 
     uint256 lenderID;
 
     constructor(address initialOwner)
         ERC721("Lend Net Debt", "LND")
-        Ownable(initialOwner)
     {
         amountPaid = 0;
     }
 
     // make interval payment
     function makePayment() public returns (bool){
-        amountPaid += amount;
-        return IERC20.transferFrom(msg.sender, ownerOf(lenderID), paymentAmount);
+        amountPaid += paymentAmount;
+        return IERC20(token).transferFrom(msg.sender, ownerOf(lenderID), paymentAmount);
     }
 
     // overpay
@@ -35,12 +37,13 @@ contract Borrower is ERC721, ERC721Pausable, ERC721Burnable {
         if(amount < paymentAmount){ return false;}
         else{
             amountPaid += amount;
-            return IERC20.transferFrom(msg.sender, ownerOf(lenderID), amount);
+            PaidInFull();
+            return IERC20(token).transferFrom(msg.sender, ownerOf(lenderID), amount);
         }
     }
 
     function PaidInFull() public returns (bool){
-        creditorAddress.PaidInFull(amountPaid);
+        return creditorContract.PaidInFull(amountPaid);
     }
 
     
@@ -54,7 +57,7 @@ contract Borrower is ERC721, ERC721Pausable, ERC721Burnable {
         return super._update(to, tokenId, auth);
     }
 
-    function GetAmountPaid() public returns (uint256){
+    function GetAmountPaid() public view returns (uint256){
         return amountPaid;
     }
 }
