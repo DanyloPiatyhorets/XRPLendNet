@@ -13,7 +13,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>XRPLendNet</title>
         <meta
@@ -23,8 +23,16 @@ const Home: NextPage = () => {
         <link href="/favicon.ico" rel="icon" />
       </Head>
 
-      <main className={styles.main}>
-        <ConnectButton />
+      <main>
+        <div className="py-10 bg-slate-400 ">
+          <div className={styles.container}>
+            <div className="content-center content-evenly">
+              <ConnectButton />
+            </div>
+            
+          </div>
+          
+        </div>
 
         <div className="mt-10">
           <p className="mt-5 text-black dark:text-black">
