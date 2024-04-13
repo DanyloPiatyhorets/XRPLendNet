@@ -8,9 +8,14 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "initialOwner",
+						"internalType": "contract Lender",
+						"name": "l",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "pA",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -265,6 +270,25 @@
 			{
 				"inputs": [],
 				"name": "PaidInFull",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "collat",
+						"type": "uint256[]"
+					}
+				],
+				"name": "ProposeCollateral",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -876,19 +900,19 @@
 			]
 		},
 		"backend/contracts/Borrower.sol": {
-			"keccak256": "0xaa5f79efbfb457e2926c38900e1021a6f1f3e0061e786ae043991df9f568aae9",
+			"keccak256": "0x3a804073465ed52e365a6696df83028dfcb162e8120d07cac7d46664d6283bdc",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://269780677835a0939b4f7dd8819e33dc0fab73a33d1fda04356704f0d20744d5",
-				"dweb:/ipfs/QmVA5fAyFjjQBXSC3jMQprdzMULzgJEdxSdHabhw64Bipo"
+				"bzz-raw://a30327df09e2b76b12a34580885163cb35eec0aba3cb391730e8638fa0cd5e59",
+				"dweb:/ipfs/QmQpsDXQB1vB5m3Num5igCimHhaoUn6LQf7cPpBpQRppPC"
 			]
 		},
 		"backend/contracts/Lender.sol": {
-			"keccak256": "0xded700d6255f87cc9c840902ca40adea9584e7b9f4aa9918baa87f10e48bbdf1",
+			"keccak256": "0xf76fb93ec5b12bca61aa1bf866ee4d816f74becc3ae21f56cdb307c67da48d1f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://552c70572ba02f16bd479ece23d2b91c53adda002b4b364c41467e22057f63ab",
-				"dweb:/ipfs/QmQpwaRzmx2Mq1SkV9ZVaH3xPtbociimKwZxVQK5rD9CJc"
+				"bzz-raw://aff58ddcc7736f47467723cbbf58e8bef1232fa8a297607aa3fe794e2f91f001",
+				"dweb:/ipfs/QmPKCQcnX2YK5eoueZ6VvB6i43VUjXDX7t7V7pwB5QpXDS"
 			]
 		}
 	},

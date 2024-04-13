@@ -20,10 +20,14 @@ contract Borrower is ERC721, ERC721Pausable{
 
     uint256 lenderID;
 
-    constructor(address initialOwner)
+    uint256[] proposedCollateralIDs;
+
+    constructor(Lender l, uint256 pA)
         ERC721("Lend Net Debt", "LND")
     {
         amountPaid = 0;
+        creditorContract = l;
+        paymentAmount = pA;
     }
 
     // make interval payment
@@ -55,6 +59,17 @@ contract Borrower is ERC721, ERC721Pausable{
         returns (address)
     {
         return super._update(to, tokenId, auth);
+    }
+
+    function ProposeCollateral(uint256[] memory collat) external returns (bool){
+        bool owned = true;
+        for(uint256 i = 0; i < collat.length; i++){
+            if(ownerOf(collat[i]) != msg.sender) owned = false;
+        }
+        require(owned == true, "you must own NFTs you put up for collateral");
+
+        setApprovalForAll(address(creditorContract), true);
+        proposedCollateralIDs = collat;
     }
 
     function GetAmountPaid() public view returns (uint256){

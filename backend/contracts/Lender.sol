@@ -14,7 +14,6 @@ contract Lender is ERC721, ERC721Pausable, IERC721Receiver {
     uint256 private principal; // Amount of XRP lent in drop
     uint32 private interest; // % interest between 0 and 1000
     
-    uint256 private term; // maximum time until loan fully repaid
     uint256 private interval; // the time between each repayment
     uint256 private originationDate;
 
@@ -26,11 +25,20 @@ contract Lender is ERC721, ERC721Pausable, IERC721Receiver {
     uint256[] private collateralIDs;
 
 
-    constructor(address borrower, address lender)
+    constructor(uint256 prnc, uint256 term, uint256 itrvl, uint32 intst)
         ERC721("Lend Net Credit", "LNC")
     {
-        
+        interest = intst;
+        interval = itrvl;
+        //originationDate = block.timestamp;
+
+        paymentAmount = prnc / (term / itrvl);
+        debtContract = new Borrower(this, paymentAmount);
+
     }
+
+
+
 
     function PaidInFull(uint256 amountRepaid) external  returns(bool){
         if(amountRepaid > principal + principal * (interest / 1000) * ((block.timestamp - originationDate) / 31556952000)){
@@ -58,6 +66,10 @@ contract Lender is ERC721, ERC721Pausable, IERC721Receiver {
         for(uint i = 0; i < collateralIDs.length; i++){
                 safeTransferFrom(address(this), recipient, collateralIDs[i]);
         }
+    }
+
+    function CheckCollateral() external view returns(uint256[] memory){
+        return collateralIDs;
     }
     // The following functions are overrides required by Solidity.
 
