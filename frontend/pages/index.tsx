@@ -25,8 +25,8 @@ const Home: NextPage = () => {
 
         <main className="flex-grow">
           <div className="py-10 bg-blue-300 pl-auto pr-10">
-            <div className="flex justify-end">
-              <div className="mr-30">
+            <div className="flex justify-start">
+              <div className="ml-12">
                 <ConnectButton/>
               </div>
             </div>

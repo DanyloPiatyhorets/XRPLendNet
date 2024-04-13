@@ -30,14 +30,19 @@ const Home: NextPage = () => {
 
         <main className="flex-grow">
           <div className="py-10 bg-blue-300 pl-auto pr-10">
-            <div className="flex justify-end">
-              <div className="mr-30">
-                <ConnectButton/>
-              </div>
+            <div className="flex justify-start">
+              <Link
+                  className=" ml-10 items-center justify-centerflex rounded-full border-black bg-blue-500 px-5 py-1.5 duration-300 ease-in-out placeholder-blue-200 text-lg text-white "
+                  href="/">Home</Link>
+              <Link
+                  className=" ml-10 items-center justify-centerflex rounded-full border-black bg-blue-500 px-5 py-1.5 duration-300 ease-in-out placeholder-blue-200 text-lg text-white "
+                  href="/borrower">Find</Link><div className="ml-12">
+              <ConnectButton/>
+            </div>
             </div>
           </div>
-          <div className="flex justify-center items-center">
-            <div className="border border-blue-700 border-2 p-4 text-center italic rounded-lg mt-10">
+            <div className="flex justify-center items-center">
+            <div className="border border-blue-700 border-2 p-4 text-center italic rounded-lg mt-10 px-20">
               <p className="text-blue-900 text-3xl mb-10 font-bold">Create a loan</p>
               <div className="flex flex-col gap-5">
                 <div className="flex">
