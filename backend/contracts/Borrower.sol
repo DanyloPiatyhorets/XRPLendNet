@@ -6,20 +6,34 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 
-contract Borrower is ERC721, ERC721Pausable, Ownable, ERC721Burnable {
+contract Borrower is ERC721, ERC721Pausable, ERC721Burnable {
+    address constant token = 0xe469c4473af82217B30CF17b10BcDb6C8c796e75;
 
+    uint256 private paymentAmount;
+    uint256 private amountPaid;
+
+    uint256 lenderID;
 
     constructor(address initialOwner)
         ERC721("Lend Net Debt", "LND")
         Ownable(initialOwner)
-    {}
-
-    function pause() public onlyOwner {
-        _pause();
+    {
+        amountPaid = 0;
     }
 
-    function unpause() public onlyOwner {
-        _unpause();
+    // make interval payment
+    function makePayment() public returns (bool){
+        return IERC20.transferFrom(msg.sender, ownerOf(lenderID), paymentAmount);
+    }
+
+    // overpay
+    function makePayment(uint256 amount) public returns (bool){
+        if(amount < paymentAmount){ return false;}
+        else{return IERC20.transferFrom(msg.sender, ownerOf(lenderID), amount);}
+    }
+
+    function paidInFull() public returns (bool){
+
     }
 
     function safeMint(address to, uint256 tokenId) public onlyOwner {
@@ -34,5 +48,9 @@ contract Borrower is ERC721, ERC721Pausable, Ownable, ERC721Burnable {
         returns (address)
     {
         return super._update(to, tokenId, auth);
+    }
+
+    function GetAmountPaid() public returns (uint256){
+        return amountPaid;
     }
 }
