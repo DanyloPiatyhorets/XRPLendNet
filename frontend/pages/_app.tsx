@@ -37,8 +37,8 @@ const xrp = {
 
 
 const config = getDefaultConfig({
-  appName: 'RainbowKit App',
-  projectId: 'YOUR_PROJECT_ID',
+  appName: 'XRPLendNet',
+  projectId: '8461a6eaad6fe74d02500d1b73da9777',
   chains: [
     xrp,
   ],
