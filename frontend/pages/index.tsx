@@ -63,9 +63,17 @@ const Home: NextPage = () => {
 
             </div>
           </div>
-        </main>
 
-        
+        </main>
+        <footer>
+          <div className="py-5 bg-blue-300">
+            <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank"
+               className="text-blue-900 flex justify-center">
+              Made with ❤️ by your friends at #60DaysofXRPL London 😎
+            </a>
+          </div>
+        </footer>
+
       </div>
   );
 };
