@@ -8,6 +8,10 @@ import Link from 'next/link'
 const Home: NextPage = () => {
   const [borrower, setBorrower] = useState("");
   const [amount, setAmount] = useState("");
+  const [interest, setInterest] = useState("");
+  const [term, setTerm] = useState("");
+
+  
 
   const handleCreateLoanSubmit = async () => {
     
@@ -53,6 +57,20 @@ const Home: NextPage = () => {
               onChange={(e) => setAmount(e.target.value)}
               type="text"
               placeholder="Enter loan value in XRP"
+              className="placeholder-gray-300 flex rounded-full border-black bg-slate-400 px-10 py-2.5 text-black duration-300 ease-in-out"
+            />
+            <input
+              value={interest}
+              onChange={(e) => setInterest(e.target.value)}
+              type="text"
+              placeholder="Enter percent interest"
+              className="placeholder-gray-300 flex rounded-full border-black bg-slate-400 px-10 py-2.5 text-black duration-300 ease-in-out"
+            />
+            <input
+              value={term}
+              onChange={(e) => setTerm(e.target.value)}
+              type="text"
+              placeholder="Enter term in days"
               className="placeholder-gray-300 flex rounded-full border-black bg-slate-400 px-10 py-2.5 text-black duration-300 ease-in-out"
             />
             <button
