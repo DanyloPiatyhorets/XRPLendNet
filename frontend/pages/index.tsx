@@ -1,7 +1,6 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -66,7 +65,7 @@ const Home: NextPage = () => {
           </div>
         </main>
 
-        <footer className={styles.footer}>
+        <footer>
           <div className="py-5 bg-blue-300">
             <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank" className="text-blue-900 flex justify-center">
               Made with ❤️ by your friends at #60DaysofXRPL London 😎
