@@ -6,15 +6,16 @@ import { useWaitForTransactionReceipt, WagmiContext, WagmiProvider, useReadContr
 import Link from 'next/link'
 import { writeContract } from '@wagmi/core'
 import { configAbi } from '../../abi/configAbi';
-import { encodeFunctionData } from 'viem';
+import { lenderAbi } from '../../abi/lender';
+import { borrowerAbi } from '../../abi/borrower';
 import { dropTransaction } from 'viem/actions';
 import { arrayBuffer } from 'stream/consumers';
 const { Web3 } = require('web3');
 
 
-
-
-
+let Lender = new Array();
+let Borrower = new Array();
+let initialised = false;
 
 const Home: NextPage = () => {
   const [borrower, setBorrower] = useState("");
@@ -25,6 +26,8 @@ const Home: NextPage = () => {
   const configAddress = "0xf1bB046fcbA08cBFad494FA25C7E523248d1d425";
   const address = useAccount().address;
   const [loans, setLoans] = useState(new Array());
+  const [lenders, setLenders] = useState(new Array());
+  const [borrowers,setBorrowers] = useState(new Array());
 
   
 
@@ -34,17 +37,51 @@ const Home: NextPage = () => {
 
   const callConfigContract = async () => {const txReceipt =  await contract.methods.GetLoans().call(); return txReceipt}
   callConfigContract().then(function(results){setLoans(results);});
+  const getOwner = async (lenderAddy: string) => {const c = new web3.eth.Contract(lenderAbi,lenderAddy); const txReceipt =  await c.methods.GetOwner().call(); return txReceipt} 
+  const getBorrower = async (lenderAddy: string) => {const c = new web3.eth.Contract(lenderAbi,lenderAddy); const txReceipt =  await c.methods.GetDebtContractAddress().call(); return txReceipt} 
+  const getBorrowerAddy = async (lenderAddy: string) => {const c = new web3.eth.Contract(borrowerAbi,lenderAddy); const txReceipt =  await c.methods.GetOwner().call(); return txReceipt} 
+
 
   const AmountDue = new Array();
   const TimeTillDue = new Array();
   const TotalRemaining = new Array();
-  
-  for (var i = 0; i < loans.length; i++){
+  const NftInfo = new Array();
 
+  
+  if (!initialised){
+    console.log(initialised);
+    for (var i = 0; i < loans.length; i++){
+      const addy = loans[i];
+      console.log(Lender);
+      getOwner(addy).then(function(ownerAddy){
+        if (ownerAddy as string == address as string){
+          Lender.push(address);
+          setLenders(Lender);
+          getBorrower(addy).then(function(borrowerContractAddress){
+            getBorrowerAddy(borrowerContractAddress).then(function(borrowerWallet){
+              Borrower.push(borrowerWallet);
+              
+            })
+            
+        })
+
+      }})
+      
+    }
+  }
+  else{
+   
+  }
+  initialised=true;
+  
+
+  const lenderBorrowerMap = new Map();
+  for (var i = 0; i < Lender.length; i++){
+    lenderBorrowerMap.set(Lender[i],Borrower[i]);
   }
   
   
-
+  console.log(lenderBorrowerMap);
 
 
   const { data: hash, writeContract } = useWriteContract() ;
@@ -158,7 +195,7 @@ const Home: NextPage = () => {
           { (<div>
             <h1 className="text-center text-blue-900 text-5xl mb-10 font-bold mt-10">Active loans</h1>
             <ul className="flex flex-wrap">
-              {(loans as unknown as any[]).map((name) => (
+              {(Lender).map((name) => (
                   <li key={name} className="w-1/2 p-4">
                     <div className="border-blue-700 border-2 p-4 rounded-lg">
                       <h1 className="text-blue-900 text-2xl mb-5 font-bold text-center">{name}</h1>
@@ -166,7 +203,7 @@ const Home: NextPage = () => {
                       <p className="text-blue-900 text-lg">Time till due:</p>
                       <p className="text-blue-900 text-lg">Total remaining:</p>
                       <p className="text-blue-900 text-lg">Nft info:</p>
-                      <p className="text-blue-900 text-lg mb-2">Borrower:</p>
+                      <p className="text-blue-900 text-lg mb-2">Borrower: {lenderBorrowerMap.get(name)}</p>
                     </div>
                   </li>
               ))}

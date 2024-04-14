@@ -1,6 +1,6 @@
 import { Abi } from "viem";
 
-export const configAbi = 
+export const borrowerAbi = 
     [
         {
             "inputs": [

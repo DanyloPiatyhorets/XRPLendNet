@@ -1,5 +1,5 @@
 import { Abi } from "viem";
-export const configAbi = 
+export const lenderAbi = 
 [
 	{
 		"inputs": [
