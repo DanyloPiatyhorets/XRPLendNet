@@ -20,11 +20,14 @@ const Home: NextPage = () => {
   const [interval, setInterval] = useState("");
   const configAddress = "0xf1bB046fcbA08cBFad494FA25C7E523248d1d425";
   const address = useAccount().address;
+
   const result = useReadContract({
     abi: configAbi,
     address: configAddress,
-    functionName: "GetLoans"
+    functionName: "GetLoans",
   });
+
+
   const { data: hash, writeContract } = useWriteContract() ;
 
   
@@ -38,6 +41,8 @@ const Home: NextPage = () => {
   };
   
   const handleCreateLoanSubmit = async () => {
+    console.log(result.error);
+    console.log(result.isPending);
     writeContract({
       abi: configAbi,
       address: configAddress,
@@ -133,10 +138,10 @@ const Home: NextPage = () => {
               
             </div>
           </div>
-          { result.isLoading && (<div>
+          { (result.data==null) && (<div>
             <h1 className="text-center text-blue-900 text-5xl mb-10 font-bold mt-10">Active loans</h1>
             <ul className="flex flex-wrap">
-              {(names).map((name) => (
+              {(names as unknown as any[]).map((name) => (
                   <li key={name} className="w-1/2 p-4">
                     <div className="border-blue-700 border-2 p-4 rounded-lg">
                       <h1 className="text-blue-900 text-2xl mb-5 font-bold text-center">{name}</h1>
@@ -145,15 +150,16 @@ const Home: NextPage = () => {
                       <p className="text-blue-900 text-lg">Total remaining:</p>
                       <p className="text-blue-900 text-lg">Nft info:</p>
                       <p className="text-blue-900 text-lg mb-2">Borrower:</p>
-
+                      <p className="text-blue-900 text-lg mb-2">{result.isPending}</p>
 
                     </div>
                   </li>
               ))}
             </ul>
-
+            
           </div>)}
           
+         
         </main>
         <footer>
           <div className="py-5 bg-blue-300 mt-10">
