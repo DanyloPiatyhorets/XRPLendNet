@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.20+commit.a1b79de6"
+		"version": "0.8.25+commit.b61c2a91"
 	},
 	"language": "Solidity",
 	"output": {
@@ -16,6 +16,11 @@
 						"internalType": "uint256",
 						"name": "pA",
 						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "borrowAddress",
+						"type": "address"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -249,6 +254,32 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "GetOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "GetProposedCollateralIDs",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -264,7 +295,7 @@
 						"type": "bool"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -389,7 +420,7 @@
 						"type": "bool"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -735,13 +766,13 @@
 		"compilationTarget": {
 			"backend/contracts/Borrower.sol": "Borrower"
 		},
-		"evmVersion": "shanghai",
+		"evmVersion": "cancun",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -900,19 +931,19 @@
 			]
 		},
 		"backend/contracts/Borrower.sol": {
-			"keccak256": "0x3a804073465ed52e365a6696df83028dfcb162e8120d07cac7d46664d6283bdc",
+			"keccak256": "0x0110134608fa3d59a3711dc9c939a8ff9df7fc05b857d2632d75b3145fa4e589",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a30327df09e2b76b12a34580885163cb35eec0aba3cb391730e8638fa0cd5e59",
-				"dweb:/ipfs/QmQpsDXQB1vB5m3Num5igCimHhaoUn6LQf7cPpBpQRppPC"
+				"bzz-raw://024558105307761066b120bf65cbed10faca36f7141eed739509cf378de976f4",
+				"dweb:/ipfs/QmbS6rKRpDDQxcHpjCkzWzLMcVspMsEmhda78E6ZfgGVcQ"
 			]
 		},
 		"backend/contracts/Lender.sol": {
-			"keccak256": "0xf76fb93ec5b12bca61aa1bf866ee4d816f74becc3ae21f56cdb307c67da48d1f",
+			"keccak256": "0xbcd3d237bc9bc76730021d3a1e281b8aa9130fc0e97e5eb663eedd224bf7171e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://aff58ddcc7736f47467723cbbf58e8bef1232fa8a297607aa3fe794e2f91f001",
-				"dweb:/ipfs/QmPKCQcnX2YK5eoueZ6VvB6i43VUjXDX7t7V7pwB5QpXDS"
+				"bzz-raw://82ac61bb9a4e764c65fa19bc7f36a12cb92480a95a70792f89c45cb0ffdd9f92",
+				"dweb:/ipfs/QmXWCr7Y7sN156PVPHAxYk8Mr75kVGjWVHb9dHREnH7Yas"
 			]
 		}
 	},

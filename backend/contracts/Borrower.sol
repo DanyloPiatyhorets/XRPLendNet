@@ -11,38 +11,44 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "backend/contracts/Lender.sol";
 
 contract Borrower is ERC721, ERC721Pausable{
-    address constant token = 0xe469c4473af82217B30CF17b10BcDb6C8c796e75;
+    address constant token = 0x1D2F0da169ceB9fC7B3144628dB156f3F6c60dBE;
 
     uint256 private paymentAmount;
     uint256 private amountPaid;
 
     Lender private creditorContract;
 
-    uint256 lenderID;
+    uint256 private borrowerID;
 
     uint256[] proposedCollateralIDs;
 
-    constructor(Lender l, uint256 pA)
+    constructor(Lender l, uint256 pA, address borrowAddress)
         ERC721("Lend Net Debt", "LND")
     {
         amountPaid = 0;
         creditorContract = l;
         paymentAmount = pA;
+
+        borrowerID = 1;
+
+        _safeMint(borrowAddress, borrowerID);
     }
 
     // make interval payment
-    function makePayment() public returns (bool){
-        amountPaid += paymentAmount;
-        return IERC20(token).transferFrom(msg.sender, ownerOf(lenderID), paymentAmount);
+    function makePayment() public payable returns (bool){
+        (bool success,) = creditorContract.GetOwner().call{value: paymentAmount}("");
+        require(success, "Failed to send Ether");
+        return success;
     }
 
     // overpay
-    function MakePayment(uint256 amount) public returns (bool){
+    function MakePayment(uint256 amount) public payable returns (bool){
+        emit Approval(msg.sender, address(this), amount);
         if(amount < paymentAmount){ return false;}
         else{
-            amountPaid += amount;
-            PaidInFull();
-            return IERC20(token).transferFrom(msg.sender, ownerOf(lenderID), amount);
+            (bool success,) = creditorContract.GetOwner().call{value: amount}("");
+            require(success, "Failed to send Ether");
+            return success;
         }
     }
 
@@ -62,17 +68,31 @@ contract Borrower is ERC721, ERC721Pausable{
     }
 
     function ProposeCollateral(uint256[] memory collat) external returns (bool){
+        
+        // below does not work as these NFTs are on a different chain
+        /*
         bool owned = true;
         for(uint256 i = 0; i < collat.length; i++){
             if(ownerOf(collat[i]) != msg.sender) owned = false;
         }
         require(owned == true, "you must own NFTs you put up for collateral");
+        */
 
         setApprovalForAll(address(creditorContract), true);
         proposedCollateralIDs = collat;
+        
+        return true;
     }
 
-    function GetAmountPaid() public view returns (uint256){
+    function GetAmountPaid() external view returns (uint256){
         return amountPaid;
+    }
+
+    function GetProposedCollateralIDs() external view returns (uint256[] memory){
+        return proposedCollateralIDs;
+    }
+
+    function GetOwner() external view returns (address){
+        return ownerOf(borrowerID);
     }
 }
