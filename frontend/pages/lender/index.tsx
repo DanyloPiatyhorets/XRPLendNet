@@ -2,17 +2,34 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from "react";
-
+import { useWaitForTransactionReceipt, WagmiContext, WagmiProvider, useReadContract , useAccount, useWriteContract} from 'wagmi';
 import Link from 'next/link'
+import { writeContract } from '@wagmi/core'
+import { configAbi } from '../../abi/configAbi';
+import { encodeFunctionData } from 'viem';
+import { Result } from 'ethers';
+
+
+
 
 const Home: NextPage = () => {
   const [borrower, setBorrower] = useState("");
   const [amount, setAmount] = useState("");
   const [interest, setInterest] = useState("");
   const [term, setTerm] = useState("");
+  const [interval, setInterval] = useState("");
+  const configAddress = "0xf1bB046fcbA08cBFad494FA25C7E523248d1d425";
+  const address = useAccount().address;
+  const result = useReadContract({
+    abi: configAbi,
+    address: configAddress,
+    functionName: "GetLoans"
+  });
+  const { data: hash, writeContract } = useWriteContract() ;
 
-
-  const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton','dmddm'];
+  
+  const names = ["hello","there"];
+  
 
   const [nameMap,setMap]= useState(new Map());
 
@@ -20,9 +37,14 @@ const Home: NextPage = () => {
     setMap((prevMap) => new Map(prevMap.set(key, value)));
   };
   
-
   const handleCreateLoanSubmit = async () => {
-    
+    writeContract({
+      abi: configAbi,
+      address: configAddress,
+      functionName: "CreateLoan",
+      args: [BigInt(amount),BigInt(term),BigInt(interval),+interest,address as "0x${string}",borrower as "0x${string}"],
+    })
+
   }
 
   return (
@@ -90,6 +112,15 @@ const Home: NextPage = () => {
                   />
                 </div>
                 <div className="flex">
+                  <input
+                      value={interval}
+                      onChange={(e) => setInterval(e.target.value)}
+                      type="number"
+                      placeholder="Enter interval in days"
+                      className="flex rounded-full border-black bg-blue-500 px-10 py-2.5 duration-300 ease-in-out placeholder-blue-200 text-xl text-white"
+                  />
+                </div>
+                <div className="flex">
                   <button
                       onClick={handleCreateLoanSubmit}
                       aria-label="button"
@@ -99,12 +130,13 @@ const Home: NextPage = () => {
                   </button>
                 </div>
               </div>
+              
             </div>
           </div>
-          <div>
+          { result.isLoading && (<div>
             <h1 className="text-center text-blue-900 text-5xl mb-10 font-bold mt-10">Active loans</h1>
             <ul className="flex flex-wrap">
-              {names.map((name) => (
+              {(names).map((name) => (
                   <li key={name} className="w-1/2 p-4">
                     <div className="border-blue-700 border-2 p-4 rounded-lg">
                       <h1 className="text-blue-900 text-2xl mb-5 font-bold text-center">{name}</h1>
@@ -120,7 +152,8 @@ const Home: NextPage = () => {
               ))}
             </ul>
 
-          </div>
+          </div>)}
+          
         </main>
         <footer>
           <div className="py-5 bg-blue-300 mt-10">
