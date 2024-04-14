@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.20+commit.a1b79de6"
+		"version": "0.8.25+commit.b61c2a91"
 	},
 	"language": "Solidity",
 	"output": {
@@ -8,13 +8,33 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "prnc",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "term",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "itrvl",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint32",
+						"name": "intst",
+						"type": "uint32"
+					},
+					{
 						"internalType": "address",
-						"name": "borrower",
+						"name": "lendAddress",
 						"type": "address"
 					},
 					{
 						"internalType": "address",
-						"name": "lender",
+						"name": "borrowAddress",
 						"type": "address"
 					}
 				],
@@ -237,6 +257,26 @@
 			},
 			{
 				"inputs": [],
+				"name": "AcceptLoan",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "CheckCollateral",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "CheckDefault",
 				"outputs": [
 					{
@@ -245,7 +285,46 @@
 						"type": "bool"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "CheckProposedCollateral",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "GetDebtContractAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "GetOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -377,12 +456,12 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "operator",
+						"name": "",
 						"type": "address"
 					},
 					{
 						"internalType": "address",
-						"name": "from",
+						"name": "",
 						"type": "address"
 					},
 					{
@@ -392,7 +471,7 @@
 					},
 					{
 						"internalType": "bytes",
-						"name": "datatsn",
+						"name": "",
 						"type": "bytes"
 					}
 				],
@@ -737,13 +816,13 @@
 		"compilationTarget": {
 			"backend/contracts/Lender.sol": "Lender"
 		},
-		"evmVersion": "shanghai",
+		"evmVersion": "cancun",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -902,19 +981,19 @@
 			]
 		},
 		"backend/contracts/Borrower.sol": {
-			"keccak256": "0x3f8c9c4f2aa4e0a46f7799bc6de67d662315f1cc1bffe42f2a68ad4769ad9d02",
+			"keccak256": "0x782440a6ac79506418bf9da93b8b9073c38e50a4fe01b1362d4709917f376bdb",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bfb62390b4a3378f7f48220ab80bb88e5680b44a07c33e81128bcdffc662f33f",
-				"dweb:/ipfs/QmeKoziNibKPw9nwgwuzeN6n4mXaRKXG6gY3pUsrVCxmLx"
+				"bzz-raw://eb29cb8ce79b8e5358cd2175ada049eb3be67c4d3d1475109e9cb6e80daf3d1e",
+				"dweb:/ipfs/Qmeb6sMkJLZcSQ3LQV33pu9LTWPc4gE8mZ8vpB249hVFHB"
 			]
 		},
 		"backend/contracts/Lender.sol": {
-			"keccak256": "0xa7cbfc93bb84526ca03c2917f6165393d72f7a62b6e591d34aa9d18c8c9baa24",
+			"keccak256": "0xbcd3d237bc9bc76730021d3a1e281b8aa9130fc0e97e5eb663eedd224bf7171e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f74be1f2e26cf71daaaadfd058440265e5f6d3dd45054cdc54104cb450e290ff",
-				"dweb:/ipfs/QmYfDH2MPF9yRJXzwZ6vXXe1fDmAp1ac1Dithsfgt8xYgb"
+				"bzz-raw://82ac61bb9a4e764c65fa19bc7f36a12cb92480a95a70792f89c45cb0ffdd9f92",
+				"dweb:/ipfs/QmXWCr7Y7sN156PVPHAxYk8Mr75kVGjWVHb9dHREnH7Yas"
 			]
 		}
 	},
