@@ -35,7 +35,13 @@ const Home: NextPage = () => {
   const callConfigContract = async () => {const txReceipt =  await contract.methods.GetLoans().call(); return txReceipt}
   callConfigContract().then(function(results){setLoans(results);});
 
+  const AmountDue = new Array();
+  const TimeTillDue = new Array();
+  const TotalRemaining = new Array();
+  
+  for (var i = 0; i < loans.length; i++){
 
+  }
   
   
 
@@ -54,8 +60,6 @@ const Home: NextPage = () => {
   };
   
   const handleCreateLoanSubmit = async () => {
-    console.log(result.error);
-    console.log(result.isPending);
     writeContract({
       abi: configAbi,
       address: configAddress,
