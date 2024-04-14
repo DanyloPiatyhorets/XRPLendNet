@@ -1,29 +1,48 @@
-This is a [RainbowKit](https://rainbowkit.com) + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org/) project bootstrapped with [`create-rainbowkit`](/packages/create-rainbowkit).
+# XRPLendNet
+## Intro
+This project was created during the London Hackathon, organised by Ripple's XRP Ledger and EasyA on 13th-14th of April 2024
 
-## Getting Started
+#60DaysofXRPL
 
-First, run the development server:
+Decentralisation is the Future
+## Relevance
+Traditional way of working with loans face several sharp problems such as leak of transparency, security vulnerabilities, low effieciency and high cost of transactions since fees are included while working with traditional institutions<br>
 
-```bash
-npm run dev
-```
+During the hackathon we addressed these problems introducing a blockchain XRPL solution
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project
+XRPLendNet provides a platform to securely and conveniently set up, trade and achieve loans between users
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Deployed on the blockchain, the application provides low cost, seamless and highly efficient functionality to operate with loans
+## How to Use
+To use XRPLendNet follow the [link](https://xrp-lend-net.vercel.app/)
 
-## Learn More
+On the home page, connect your wallet
 
-To learn more about this stack, take a look at the following resources:
+Then you will be able to either create a new loan (as well as track your active loans) and find available loans to get 
 
-- [RainbowKit Documentation](https://rainbowkit.com) - Learn how to customize your wallet connection flow.
-- [wagmi Documentation](https://wagmi.sh) - Learn how to interact with Ethereum.
-- [Next.js Documentation](https://nextjs.org/docs) - Learn how to build a Next.js application.
 
-You can check out [the RainbowKit GitHub repository](https://github.com/rainbow-me/rainbowkit) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Technologies used
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+While working on the project, the following technologies were used
 
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- XRP Ledger EVM Sidechain
+- Solidity (for smart contracts)
+- Next.js (for frontend)
+- Tailwind (for frontend)
+
+## Further improvements
+Future development plans include:
+
+- **Collateral System Improvement**: to automatically deliver of collateral when loan is repayed / defaulted
+
+- **Use of Ripple's upcoming stable-coin**: to provide less risk in loans as the value will be less volatile
+
+- **Security Enhancement**: to create a secondary securities market as opposed to directly trading loans
+
+## Outro
+Thank you very much for checking out our project! I hope that has been an interesting experience for you<br>
+Please feel free to reach me out for any questions, clarifications, objections or suggestions regarding this application
+- Here via GitHub
+- Or via email: [Danylo.Piatyhorets@city.ac.uk](mailto:Danylo.Piatyhorets@city.ac.uk)
