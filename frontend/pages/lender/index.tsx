@@ -7,7 +7,11 @@ import Link from 'next/link'
 import { writeContract } from '@wagmi/core'
 import { configAbi } from '../../abi/configAbi';
 import { encodeFunctionData } from 'viem';
-import { Result } from 'ethers';
+import { dropTransaction } from 'viem/actions';
+import { arrayBuffer } from 'stream/consumers';
+const { Web3 } = require('web3');
+
+
 
 
 
@@ -20,12 +24,21 @@ const Home: NextPage = () => {
   const [interval, setInterval] = useState("");
   const configAddress = "0xf1bB046fcbA08cBFad494FA25C7E523248d1d425";
   const address = useAccount().address;
+  const [loans, setLoans] = useState(new Array());
 
-  const result = useReadContract({
-    abi: configAbi,
-    address: configAddress,
-    functionName: "GetLoans",
-  });
+  
+
+  const web3 = new Web3('https://rpc-evm-sidechain.xrpl.org'); 
+
+  const contract = new web3.eth.Contract(configAbi,configAddress);
+
+  const callConfigContract = async () => {const txReceipt =  await contract.methods.GetLoans().call(); return txReceipt}
+  callConfigContract().then(function(results){setLoans(results);});
+
+
+  
+  
+
 
 
   const { data: hash, writeContract } = useWriteContract() ;
@@ -138,10 +151,10 @@ const Home: NextPage = () => {
               
             </div>
           </div>
-          { (result.data==null) && (<div>
+          { (<div>
             <h1 className="text-center text-blue-900 text-5xl mb-10 font-bold mt-10">Active loans</h1>
             <ul className="flex flex-wrap">
-              {(names as unknown as any[]).map((name) => (
+              {(loans as unknown as any[]).map((name) => (
                   <li key={name} className="w-1/2 p-4">
                     <div className="border-blue-700 border-2 p-4 rounded-lg">
                       <h1 className="text-blue-900 text-2xl mb-5 font-bold text-center">{name}</h1>
@@ -150,8 +163,6 @@ const Home: NextPage = () => {
                       <p className="text-blue-900 text-lg">Total remaining:</p>
                       <p className="text-blue-900 text-lg">Nft info:</p>
                       <p className="text-blue-900 text-lg mb-2">Borrower:</p>
-                      <p className="text-blue-900 text-lg mb-2">{result.isPending}</p>
-
                     </div>
                   </li>
               ))}
