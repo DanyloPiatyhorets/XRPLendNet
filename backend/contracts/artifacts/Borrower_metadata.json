@@ -931,11 +931,11 @@
 			]
 		},
 		"backend/contracts/Borrower.sol": {
-			"keccak256": "0x0110134608fa3d59a3711dc9c939a8ff9df7fc05b857d2632d75b3145fa4e589",
+			"keccak256": "0x5ad7a92e911b1a1e130cda95be189c0f4c35c62454802aef706c91f521bd3da2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://024558105307761066b120bf65cbed10faca36f7141eed739509cf378de976f4",
-				"dweb:/ipfs/QmbS6rKRpDDQxcHpjCkzWzLMcVspMsEmhda78E6ZfgGVcQ"
+				"bzz-raw://63ff8447d1048a9218eb5af1df694216b9ae974a28f70eb747bc5a052c81be08",
+				"dweb:/ipfs/QmP72pEkUb1mKAsSBvhzaXgQzn47hDwHEyQtci2nMkuuKk"
 			]
 		},
 		"backend/contracts/Lender.sol": {

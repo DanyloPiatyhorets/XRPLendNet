@@ -38,16 +38,17 @@ contract Borrower is ERC721, ERC721Pausable{
     function makePayment() public payable returns (bool){
         (bool success,) = creditorContract.GetOwner().call{value: paymentAmount}("");
         require(success, "Failed to send Ether");
+        amountPaid += paymentAmount;
         return success;
     }
 
     // overpay
     function MakePayment(uint256 amount) public payable returns (bool){
-        emit Approval(msg.sender, address(this), amount);
         if(amount < paymentAmount){ return false;}
         else{
             (bool success,) = creditorContract.GetOwner().call{value: amount}("");
             require(success, "Failed to send Ether");
+            amountPaid += amount;
             return success;
         }
     }
