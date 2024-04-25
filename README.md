@@ -13,6 +13,8 @@ During the hackathon we addressed these problems introducing a blockchain XRPL s
 ## Project
 XRPLendNet provides a platform to securely and conveniently set up, trade and achieve loans between users
 
+Check out our presentation following the [link](https://www.canva.com/design/DAGCUiF8yaw/F4uKxcg9tsDahK4MJ0JMpg/edit)
+
 Deployed on the blockchain, the application provides low cost, seamless and highly efficient functionality to operate with loans
 ## How to Use
 To use XRPLendNet follow the [link](https://xrp-lend-net.vercel.app/)
